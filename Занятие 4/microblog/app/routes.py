@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 from app import app
 
 @app.route('/')
@@ -16,3 +16,18 @@ def show_user_profile(username):
 @app.route('/post/<username>/<int:age>')
 def show_post(username, age):
   return 'Возраст %s - %d' %(username, age)
+
+  
+@app.route('/test', methods=['GET', 'POST'])
+def test_form():
+  if request.method == 'GET':
+    return '''
+    <form method="post">
+        <input type="text" name="expression" />
+        <input type="submit" value="Calculate" />
+    </form>
+'''
+  elif request.method == 'POST':
+    expression = request.form.get('expression')
+    result = eval(expression)
+    return 'result: %s' % result
