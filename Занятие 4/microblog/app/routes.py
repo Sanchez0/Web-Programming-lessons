@@ -29,5 +29,5 @@ def test_form():
 '''
   elif request.method == 'POST':
     expression = request.form.get('expression')
-    result = eval(expression)
+    result = expression
     return 'result: %s' % result
